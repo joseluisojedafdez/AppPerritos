@@ -3,7 +3,7 @@ package com.i4bchile.appperritos.model;
 import java.util.List;
 import java.util.Map;
 
-public class BreedList {
+public class Breed {
 
     private Map<String, List<String>> message ;
     private String status;

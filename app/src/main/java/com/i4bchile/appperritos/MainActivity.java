@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.i4bchile.appperritos.model.BreedList;
+import com.i4bchile.appperritos.presenter.BreedListPresenter;
+
 public class MainActivity extends AppCompatActivity {
 
     /*TODO
@@ -18,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     [] PARTE 2 CONSUMO Y MUESTRA INFORMACIÓN
         [x] Añadir dependencias de Retrofit
         [x] Crear el Cliente Retrofit y la interface necesaria para la conexión
-        [] Realizar la conexión a la API
+        [x] Realizar la conexión a la API
+        [x] Añadir permisos de internet en el Manifest
         [] Crear el presentador para cada vista. Crear las interfaces correspondientes
         [] IMplementar los métodos de las interfaces en las vistas
         [] Instanciar los adaptadores donde sean necesario y pasar los datasets que necesite cada uno de ellos
@@ -30,9 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
      */
 
+    BreedListPresenter presenter=new BreedListPresenter();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        presenter.lodadBreedList();
     }
 }

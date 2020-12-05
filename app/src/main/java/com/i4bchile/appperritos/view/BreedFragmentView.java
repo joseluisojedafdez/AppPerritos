@@ -10,24 +10,24 @@ import android.view.ViewGroup;
 
 import com.i4bchile.appperritos.R;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
-import com.i4bchile.appperritos.presenter.IBreedPresenter;
+import com.i4bchile.appperritos.presenter.IBreedPresenterView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BreedFragment#newInstance} factory method to
+ * Use the {@link BreedFragmentView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BreedFragment extends Fragment implements IBreedPresenter {
+public class BreedFragmentView extends Fragment implements IBreedPresenterView {
 
-    BreedPresenter presenter=new BreedPresenter();
-    BreedAdapter adapter=new BreedAdapter();
+    //BreedPresenter presenter=new BreedPresenter();
+    //BreedAdapter adapter=new BreedAdapter();
 
-    public BreedFragment() {
+    public BreedFragmentView() {
         // Required empty public constructor
     }
 
-    public static BreedFragment newInstance() {
-        BreedFragment fragment = new BreedFragment();
+    public static BreedFragmentView newInstance() {
+        BreedFragmentView fragment = new BreedFragmentView();
         return fragment;
     }
 

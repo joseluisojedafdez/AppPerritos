@@ -3,11 +3,16 @@ package com.i4bchile.appperritos.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.i4bchile.appperritos.R;
+import com.i4bchile.appperritos.model.Repository;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
+import com.i4bchile.appperritos.presenter.IBreedPresenterView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IBreedPresenterView {
+
+    private static final String TAG ="Main Activity";
 
     /*TODO
 
@@ -50,12 +55,21 @@ public class MainActivity extends AppCompatActivity {
 
      */
 
-    BreedPresenter presenter=new BreedPresenter();
+    BreedPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter.lodadBreedList();
+
+        presenter = new BreedPresenter(this,new Repository());
+        Log.d(TAG, "onCreate: llamando a showBreed en Main Activity");
+        presenter.showBreed();
+
+    }
+
+    @Override
+    public void showBreed() {
+
     }
 }

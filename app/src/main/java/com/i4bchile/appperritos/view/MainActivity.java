@@ -1,6 +1,9 @@
 package com.i4bchile.appperritos.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,23 +13,33 @@ import com.i4bchile.appperritos.model.Repository;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
 import com.i4bchile.appperritos.presenter.IBreedPresenterView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements IBreedPresenterView {
 
-    private static final String TAG ="Main Activity";
+    private static final String TAG ="InfoLog";
 
     /*TODO
 
     [] PARTE 1 MODELO
        [x] Creación de los POJOS (RazaLista, RazaImagen,Favoritos)
        [] Crear item_list_xxx.xml (detalle de cada elemento para cada lista)
+            [] item_list_breed.xml
+            [] item_list_images.xml
+            [] item_list_favorites.xml
+
        [] Crear los fragmentos necesarios:
-               [] Listado de Razas
+               [] Listado de Razas (mainActivity)
                [] Detalles
                [] Listado de Favoritos
        [] Mostrar en cada fragmento el Recyclerview correspondiente
+                [] RecyclerView Breed en Main Activity
+                [] RecyclerView Detalles en BreedFragmentView
+                [] Recyclerview Favorites en FavoritesFragmentView
 
        [] Crear los adapters que sean necesarios
-            [] Adapter para Breed
+            [x] Adapter para Breed
             [] Adapter para BreedImage
             [] Adapter para Favorites
 
@@ -37,15 +50,18 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
         [x] Añadir permisos de internet en el Manifest
         [X] Activar viewBinding
         [] Crear el presentador para cada vista. Crear las interfaces correspondientes
-            [] Crear el presentador para Breed
+            [x] Crear el presentador para Breed
             [] Crear el presentador para BreedImage
             [] Crear el presentador para Favorites
         [] IMplementar los métodos de las interfaces en las vistas
-            [] implementar metodos Breed
+            [x] implementar metodos Breed
             [] implementar metodos BreedImage
             [] implementar metodos Favorites
 
         [] Instanciar los adaptadores donde sean necesario y pasar los datasets que necesite cada uno de ellos
+            [x] instanciar y actualizar BreedAdapter
+            [] instanciaar y actualizar BreedImageAdapter
+            [] instanciar y actualizar FavoritesAdapter
 
 
     [] PARTE 3 GUARDAR FAVORITOS USANDO FIRESTORE
@@ -56,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
      */
 
     BreedPresenter presenter;
+    private BreedAdapter adapter;
+    private RecyclerView recyclerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +81,17 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
         setContentView(R.layout.activity_main);
 
         presenter = new BreedPresenter(this,new Repository());
-        Log.d(TAG, "onCreate: llamando a showBreed en Main Activity");
-        presenter.showBreed();
+        Log.d(TAG, "onCreate: construyendo adaptador y Recyclerview");
+        adapter=new BreedAdapter(new ArrayList<>());
+        recyclerview=findViewById(R.id.rv_breed_recycler);
+        recyclerview.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerview.setAdapter(adapter);
 
     }
 
     @Override
-    public void showBreed() {
-
+    public void showBreed(List<String> breeds) {
+        Log.d(TAG, "showBreed: Actualizando lista de breeds en el adapter");
+        adapter.updateBreeds(breeds);
     }
 }

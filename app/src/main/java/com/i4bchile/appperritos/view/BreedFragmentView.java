@@ -12,12 +12,14 @@ import com.i4bchile.appperritos.R;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
 import com.i4bchile.appperritos.presenter.IBreedPresenterView;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BreedFragmentView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BreedFragmentView extends Fragment implements IBreedPresenterView {
+public class BreedFragmentView extends Fragment{
 
     //BreedPresenter presenter=new BreedPresenter();
     //BreedAdapter adapter=new BreedAdapter();
@@ -44,8 +46,7 @@ public class BreedFragmentView extends Fragment implements IBreedPresenterView {
         return inflater.inflate(R.layout.fragment_breed, container, false);
     }
 
-    @Override
-    public void showBreed() {
 
-    }
+
+
 }

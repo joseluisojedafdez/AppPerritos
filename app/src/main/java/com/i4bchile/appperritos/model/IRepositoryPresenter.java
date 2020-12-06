@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IRepositoryPresenter {
 
-void showBreed();
+void showBreed(List<String> breeds);
 
 }

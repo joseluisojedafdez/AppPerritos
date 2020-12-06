@@ -5,8 +5,10 @@ import android.util.Log;
 import com.i4bchile.appperritos.model.IRepositoryPresenter;
 import com.i4bchile.appperritos.model.Repository;
 
+import java.util.List;
+
 public class BreedPresenter implements IRepositoryPresenter {
-    private static final String TAG = "BreedListPresenter";
+    private static final String TAG = "InfoLog";
     private IBreedPresenterView viewBreed;
     private Repository repository;
 
@@ -20,7 +22,8 @@ public class BreedPresenter implements IRepositoryPresenter {
     }
 
     @Override
-    public void showBreed() {
-        Log.d(TAG, "showBreed: llamando a ShowBreed en Presenter");
+    public void showBreed(List<String> breeds) {
+        Log.d(TAG, "showBreed: llamando a ShowBreed en Presenter"+breeds);
+        viewBreed.showBreed(breeds);
     }
 }

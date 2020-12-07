@@ -4,20 +4,14 @@ import java.util.List;
 
 public class BreedImage {
     
-    private List<String> images;
+    private List<String> message;
+    private String status;
 
-    public List<String> getImages() {
-        return images;
+    public List<String> getMessage() {
+        return message;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
-    }
-
-    @Override
-    public String toString() {
-        return "BreedImage{" +
-                "images=" + images +
-                '}';
+    public String getStatus() {
+        return status;
     }
 }

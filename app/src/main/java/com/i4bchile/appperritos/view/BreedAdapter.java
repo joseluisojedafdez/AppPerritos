@@ -3,14 +3,12 @@ package com.i4bchile.appperritos.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.i4bchile.appperritos.R;
-import com.i4bchile.appperritos.model.Breed;
 
 import java.util.List;
 
@@ -65,7 +63,7 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.BreedAdapter
 
         public BreedAdapterVH(@NonNull View itemView) {
             super(itemView);
-            tvBreed=itemView.findViewById(R.id.tvBreed);
+            tvBreed=itemView.findViewById(R.id.tvPictures);
             itemView.setOnClickListener(this);
 
         }

@@ -3,23 +3,33 @@ package com.i4bchile.appperritos.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.i4bchile.appperritos.R;
+import com.i4bchile.appperritos.model.Repository;
+import com.i4bchile.appperritos.presenter.IBreedPresenterView;
+import com.i4bchile.appperritos.presenter.PicturesPresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PicturesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PicturesFragment extends Fragment {
+public class PicturesFragment extends Fragment implements IBreedPresenterView, OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String TAG = "Infolog";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -27,6 +37,9 @@ public class PicturesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TextView tvBreedTitle;
+    private PicturesPresenter presenter;
+    private PicturesAdapter adapter;
+    private RecyclerView recyclerview;
 
     public PicturesFragment() {
         // Required empty public constructor
@@ -68,6 +81,23 @@ public class PicturesFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_pictures, container, false);
         tvBreedTitle=view.findViewById(R.id.textView);
         tvBreedTitle.setText("Picture list for breed: " +mParam2.toUpperCase());
+        Log.d(TAG, "onCreate View: llamando al presentador de Pictures");
+        adapter=new PicturesAdapter(new ArrayList<>(),this);
+        presenter=new PicturesPresenter(this,new Repository(),mParam2);
+        recyclerview=view.findViewById(R.id.rv_Pictures);
+        recyclerview.setLayoutManager(new GridLayoutManager(getContext(),2));
+        recyclerview.setAdapter(adapter);
+
         return view;
+    }
+
+    @Override
+    public void showBreed(List<String> breeds) {
+            adapter.updatePictures(breeds);
+    }
+
+    @Override
+    public void onClick(int position) {
+
     }
 }

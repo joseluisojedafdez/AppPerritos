@@ -16,7 +16,7 @@ import com.i4bchile.appperritos.presenter.IBreedPresenterView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements IBreedPresenterView {
+public class MainActivity extends AppCompatActivity implements IBreedPresenterView, OnItemClickListener {
 
     private static final String TAG ="InfoLog";
 
@@ -79,10 +79,9 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        adapter=new BreedAdapter(new ArrayList<>(),this);
         presenter = new BreedPresenter(this,new Repository());
         Log.d(TAG, "onCreate: construyendo adaptador y Recyclerview");
-        adapter=new BreedAdapter(new ArrayList<>());
         recyclerview=findViewById(R.id.rv_breed_recycler);
         recyclerview.setLayoutManager(new GridLayoutManager(this,2));
         recyclerview.setAdapter(adapter);
@@ -93,5 +92,11 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
     public void showBreed(List<String> breeds) {
         Log.d(TAG, "showBreed: Actualizando lista de breeds en el adapter");
         adapter.updateBreeds(breeds);
+    }
+
+
+    @Override
+    public void onClick(int position) {
+        Log.d(TAG, "onClick: haciendo click en el elemento de la lista"+adapter.getListOfBreeds().get(position));
     }
 }

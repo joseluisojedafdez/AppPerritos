@@ -1,6 +1,7 @@
 package com.i4bchile.appperritos.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -98,5 +99,7 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
     @Override
     public void onClick(int position) {
         Log.d(TAG, "onClick: haciendo click en el elemento de la lista"+adapter.getListOfBreeds().get(position));
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_recyclerview,PicturesFragment.newInstance("",adapter.getListOfBreeds().get(position))).commit();
+
     }
 }

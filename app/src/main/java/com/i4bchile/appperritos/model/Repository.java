@@ -40,7 +40,7 @@ public class Repository {
                 Log.d(TAG, "onResponse: Lista razas: "+response.body().getMessage().keySet().toString());
                 List<String> breeds=new ArrayList<String>();
                 breeds.addAll(response.body().getMessage().keySet());
-                Log.d(TAG, "onResponse: Enviando lista al presentador"+breeds.toString());
+                Log.d(TAG, "onResponse: Enviando lista al presentador"+breeds.toString().toUpperCase());
                 breedPresenter.showBreed(breeds);
 
             }
@@ -59,9 +59,10 @@ public class Repository {
         RetrofitClient.getRetrofitInstance().getBreedDetail(pBreed).enqueue(new Callback<BreedImage>(){
             @Override
             public void onResponse(Call<BreedImage> call, Response<BreedImage> response) {
-                Log.d(TAG, "onResponse: Lista imagenes"+pBreed);
+                Log.d(TAG, "onResponse: Lista imagenes "+pBreed.toUpperCase());
                 Log.d(TAG, "onResponse: Lista de fotos: "+response.body().getMessage().toString());
                 breedsPicture.addAll(response.body().getMessage());
+                Log.d(TAG, "onResponse: Enviando lista imágenes al presentador"+pBreed.toUpperCase());
                 picturesPresenter.showBreed(breedsPicture);
             }
 

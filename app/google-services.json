@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "35596463758",
+    "project_id": "app-perritos-4e2d3",
+    "storage_bucket": "app-perritos-4e2d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35596463758:android:501b6cf16c0e23ff1523df",
+        "android_client_info": {
+          "package_name": "com.i4bchile.appperritos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35596463758-ahee9mh2h94nlfg5eer05d1q991td7kj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA86YI6VfiQVYB8oQHzqmhNQxx0uHr62fs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35596463758-ahee9mh2h94nlfg5eer05d1q991td7kj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

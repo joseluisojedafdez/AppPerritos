@@ -2,12 +2,22 @@ package com.i4bchile.appperritos.model;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.i4bchile.appperritos.data.RetrofitClient;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
 import com.i4bchile.appperritos.presenter.PicturesPresenter;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,6 +31,7 @@ public class Repository {
     private PicturesPresenter picturesPresenter;
     private static final String TAG = "InfoLog";
     private List<String> breedsPicture=new ArrayList<>();
+    private FirebaseFirestore dbFavorites= FirebaseFirestore.getInstance();
 
     public void setPicturesPresenter(PicturesPresenter picturesPresenter) {
         this.picturesPresenter = picturesPresenter;
@@ -74,6 +85,27 @@ public class Repository {
         });
     }
 
+    public void loadNewFavorite(String pPicture, String pBreed){
 
+        Map<String,Object> favorite=new HashMap<>();
+        favorite.put("breed",pBreed);
+        favorite.put("urlPicture",pPicture);
+        favorite.put("timeStamp",new Date().toString() );
+
+        dbFavorites.collection("favorites")
+                .add(favorite)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
 
 }

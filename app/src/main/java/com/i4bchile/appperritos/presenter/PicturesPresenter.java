@@ -29,5 +29,9 @@ public class PicturesPresenter implements IRepositoryPresenter {
             Log.d(TAG, "showBreed: llamando a ShowBreed en PicturesPresenter"+breeds);
             viewPicture.showBreed(breeds);
         }
+
+        public void addFavorite(String pPicture, String pBreed){
+            repository.loadNewFavorite(pPicture,pBreed);
+        }
     }
 

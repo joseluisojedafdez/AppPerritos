@@ -17,14 +17,14 @@ import java.util.List;
 
 public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.PicturesAdapterVH> {
     private List<String> listOfPictures;
-    private OnItemClickListener listener;
+    private OnItemLongClickListener listener;
 
     public List<String> getListOfPictures() {
         return listOfPictures;
     }
 
 
-    public PicturesAdapter(List<String> listOfPictures, OnItemClickListener listener) {
+    public PicturesAdapter(List<String> listOfPictures, OnItemLongClickListener listener) {
         this.listOfPictures = listOfPictures;
         this.listener = listener;
     }
@@ -55,7 +55,7 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
         notifyDataSetChanged();
     }
 
-    public class PicturesAdapterVH extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class PicturesAdapterVH extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         private ImageView imgPictures;
         private Context context;
@@ -64,13 +64,11 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
             super(itemView);
             imgPictures=itemView.findViewById(R.id.img_pictures);
             context=itemView.getContext();
+            itemView.setOnLongClickListener(this);
 
         }
 
-        @Override
-        public void onClick(View v) {
 
-        }
 
 
         public void bind(String picture) {
@@ -78,5 +76,16 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
 
 
         }
+
+
+        @Override
+        public boolean onLongClick(View v) {
+
+            int position=getAdapterPosition();
+            listener.onLongClick(position);
+            return true;
+
+        }
     }
-}
+    }
+

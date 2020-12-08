@@ -1,5 +1,6 @@
 package com.i4bchile.appperritos.view;
 
+import android.icu.number.LocalizedNumberFormatter;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.i4bchile.appperritos.R;
 import com.i4bchile.appperritos.model.Repository;
@@ -25,7 +27,7 @@ import java.util.List;
  * Use the {@link PicturesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PicturesFragment extends Fragment implements IBreedPresenterView, OnItemClickListener {
+public class PicturesFragment extends Fragment implements IBreedPresenterView, OnItemLongClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,7 +99,9 @@ public class PicturesFragment extends Fragment implements IBreedPresenterView, O
     }
 
     @Override
-    public void onClick(int position) {
-
+    public void onLongClick(int position) {
+        Log.d(TAG, "onClick: haciendo long click en el elemento de la lista"+adapter.getListOfPictures().get(position));
+        Toast.makeText(getContext(),"Adding the picture "+adapter.getListOfPictures().get(position)+" to favorites", Toast.LENGTH_LONG).show();
+        presenter.addFavorite(adapter.getListOfPictures().get(position),mParam2);
     }
 }

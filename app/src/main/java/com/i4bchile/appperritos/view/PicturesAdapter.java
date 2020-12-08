@@ -1,13 +1,16 @@
 package com.i4bchile.appperritos.view;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.i4bchile.appperritos.R;
 
 import java.util.List;
@@ -54,12 +57,13 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
 
     public class PicturesAdapterVH extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView textView;
+        private ImageView imgPictures;
+        private Context context;
 
         public PicturesAdapterVH(@NonNull View itemView) {
             super(itemView);
-            textView=itemView.findViewById(R.id.tvPictures);
-
+            imgPictures=itemView.findViewById(R.id.img_pictures);
+            context=itemView.getContext();
 
         }
 
@@ -70,7 +74,7 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
 
 
         public void bind(String picture) {
-            textView.setText(picture);
+            Glide.with(context).load(picture).override(500,500).into(imgPictures);
 
 
         }

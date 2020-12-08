@@ -32,7 +32,7 @@
             android:elevation="16dp">
 
             <TextView
-                android:id="@+id/tvPictures"
+                android:id="@+id/img_pictures"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,7 +61,7 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
 
         public PicturesAdapterVH(@NonNull View itemView) {
             super(itemView);
-            imgPictures=itemView.findViewById(R.id.img_pictures);
+            imgPictures=itemView.findViewById(R.id.img_breed);
             context=itemView.getContext();
             itemView.setOnLongClickListener(this);
 
@@ -72,7 +71,10 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
 
 
         public void bind(String picture) {
-            Glide.with(context).load(picture).override(500,500).into(imgPictures);
+            Glide.with(context).
+                    load(picture).
+                    override(500,500).
+                    into(imgPictures);
 
 
         }

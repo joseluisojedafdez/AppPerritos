@@ -8,7 +8,7 @@
     android:elevation="8dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_Breed"
+        android:id="@+id/cv_favorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -32,7 +32,7 @@
             android:elevation="16dp">
 
             <ImageView
-                android:id="@+id/img_pictures"
+                android:id="@+id/img_breed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

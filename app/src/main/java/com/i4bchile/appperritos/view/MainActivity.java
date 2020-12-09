@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.i4bchile.appperritos.R;
 import com.i4bchile.appperritos.model.Repository;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
+import com.i4bchile.appperritos.presenter.FavoritesPresenter;
 import com.i4bchile.appperritos.presenter.IBreedPresenterView;
 
 import java.util.ArrayList;
@@ -75,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
     BreedPresenter presenter;
     private BreedAdapter adapter;
     private RecyclerView recyclerview;
+    private Button viewFavorites;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +91,13 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
         recyclerview=findViewById(R.id.rv_breed_recycler);
         recyclerview.setLayoutManager(new GridLayoutManager(this,2));
         recyclerview.setAdapter(adapter);
+        viewFavorites=findViewById(R.id.bt_view_favorites);
+        viewFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_recyclerview,FavoritesFragment.newInstance("","")).commit();
+            }
+        });
 
     }
 

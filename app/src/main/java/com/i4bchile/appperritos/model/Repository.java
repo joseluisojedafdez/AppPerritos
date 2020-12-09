@@ -4,13 +4,18 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.i4bchile.appperritos.data.RetrofitClient;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
+import com.i4bchile.appperritos.presenter.FavoritesPresenter;
 import com.i4bchile.appperritos.presenter.PicturesPresenter;
 
 import java.util.ArrayList;
@@ -29,10 +34,14 @@ public class Repository {
 
     private BreedPresenter breedPresenter;
     private PicturesPresenter picturesPresenter;
+    private FavoritesPresenter favoritesPresenter;
     private static final String TAG = "InfoLog";
     private List<String> breedsPicture=new ArrayList<>();
     private FirebaseFirestore dbFavorites= FirebaseFirestore.getInstance();
 
+    public void setFavoritesPresenter(FavoritesPresenter favoritesPresenter) {
+        this.favoritesPresenter = favoritesPresenter;
+    }
     public void setPicturesPresenter(PicturesPresenter picturesPresenter) {
         this.picturesPresenter = picturesPresenter;
     }
@@ -108,4 +117,44 @@ public class Repository {
                 });
     }
 
+    public void downloadAllFavorites(){
+        List<Favorites> listFavorites=new ArrayList<>();
+        dbFavorites.collection("favorites")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                Favorites favorite=setFavorite(document);
+                                listFavorites.add(favorite);
+                                Log.d(TAG, "onComplete: Lista Favoritos:a añadido " + favorite.toString() );
+                                Log.d(TAG, "onComplete: La lista tiene actualmente "+ listFavorites.size()+" elementos");
+                            }
+                            Log.d(TAG, "onComplete: enviando lista favoritos al presenter"+listFavorites.toString());
+                            Log.d(TAG, "onComplete: La lista tiene actualmente "+listFavorites.size()+" elementos");
+                            favoritesPresenter.showFavorites(listFavorites);
+
+
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+
+                    }
+
+                });
+
+    }
+
+
+
+
+    private Favorites setFavorite(QueryDocumentSnapshot document){
+        Favorites favorite=new Favorites();
+        favorite.setBreed(document.getString("breed"));
+        favorite.setTimeStamp(document.getString("timeStamp"));
+        favorite.setUrlImage(document.getString("urlPicture"));
+        return favorite;
+    }
 }

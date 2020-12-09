@@ -2,6 +2,7 @@ package com.i4bchile.appperritos.presenter;
 
 import android.util.Log;
 
+import com.i4bchile.appperritos.model.Favorites;
 import com.i4bchile.appperritos.model.IRepositoryPresenter;
 import com.i4bchile.appperritos.model.Repository;
 
@@ -23,7 +24,9 @@ public class BreedPresenter implements IRepositoryPresenter {
 
     @Override
     public void showBreed(List<String> breeds) {
-        Log.d(TAG, "showBreed: llamando a ShowBreed en Presenter"+breeds);
+        Log.d(TAG, "showBreed: llamando a ShowBreed en Presenter" + breeds);
         viewBreed.showBreed(breeds);
     }
+
+
 }

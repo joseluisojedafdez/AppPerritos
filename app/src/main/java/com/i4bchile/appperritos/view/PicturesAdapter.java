@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.i4bchile.appperritos.R;
+import com.i4bchile.appperritos.databinding.ItemListPicturesBinding;
 
 import java.util.List;
 
 public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.PicturesAdapterVH> {
     private List<String> listOfPictures;
     private OnItemLongClickListener listener;
+    private ItemListPicturesBinding binding;
 
     public List<String> getListOfPictures() {
         return listOfPictures;
@@ -31,7 +33,9 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
     @NonNull
     @Override
     public PicturesAdapter.PicturesAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_pictures,parent,false);
+        binding=ItemListPicturesBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        View view= binding.getRoot();
+
 
         return new PicturesAdapterVH(view);
     }
@@ -61,7 +65,7 @@ public class PicturesAdapter extends RecyclerView.Adapter<PicturesAdapter.Pictur
 
         public PicturesAdapterVH(@NonNull View itemView) {
             super(itemView);
-            imgPictures=itemView.findViewById(R.id.img_breed);
+            imgPictures=binding.imgBreed;
             context=itemView.getContext();
             itemView.setOnLongClickListener(this);
 

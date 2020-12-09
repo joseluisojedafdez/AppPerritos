@@ -1,5 +1,7 @@
 package com.i4bchile.appperritos.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Favorites {
 
     private String breed;
@@ -30,6 +32,7 @@ public class Favorites {
         this.timeStamp = timeStamp;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "Favorites{" +

@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.i4bchile.appperritos.R;
+import com.i4bchile.appperritos.databinding.ItemListBreedBinding;
 
 import java.util.List;
 
 public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.BreedAdapterVH> {
     private List<String> listOfBreeds;
     private OnItemClickListener listener;
+    private ItemListBreedBinding binding;
 
     public BreedAdapter(List<String> listOfBreeds, OnItemClickListener pListener) {
         this.listOfBreeds = listOfBreeds;
@@ -28,8 +30,9 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.BreedAdapter
     @NonNull
     @Override
     public BreedAdapter.BreedAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        binding=ItemListBreedBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        View view=binding.getRoot();
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_breed,parent,false);
 
         return new BreedAdapterVH(view);
 
@@ -63,7 +66,7 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.BreedAdapter
 
         public BreedAdapterVH(@NonNull View itemView) {
             super(itemView);
-            tvBreed=itemView.findViewById(R.id.img_breed);
+            tvBreed=binding.imgBreed;;
             itemView.setOnClickListener(this);
 
         }

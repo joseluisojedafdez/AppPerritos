@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.i4bchile.appperritos.R;
+import com.i4bchile.appperritos.databinding.ItemListFavoritesBinding;
 import com.i4bchile.appperritos.model.Favorites;
 
 import java.util.List;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesAdapterVH>{
     private List<Favorites> favoritesList;
+    private ItemListFavoritesBinding binding;
     private static final String TAG = "Infolog";
     public FavoritesAdapter(List<Favorites> favoritesList) {
         this.favoritesList = favoritesList;
@@ -28,7 +30,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     @Override
     public FavoritesAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder: la lista de favoritos tiene "+favoritesList.size()+" elementos");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_favorites,parent,false);
+        binding=ItemListFavoritesBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        View view=binding.getRoot();
 
         return new FavoritesAdapterVH(view);
     }
@@ -64,9 +67,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         public FavoritesAdapterVH(@NonNull View itemView) {
             super(itemView);
-            breedFavorite=itemView.findViewById(R.id.tv_breed_favorite);
-            timeStamp=itemView.findViewById(R.id.tv_time_stamp);
-            imgFavorite=itemView.findViewById(R.id.img_breed);
+            breedFavorite=binding.tvBreedFavorite;
+            timeStamp=binding.tvTimeStamp;
+            imgFavorite=binding.imgBreed;
             context=itemView.getContext();
         }
 

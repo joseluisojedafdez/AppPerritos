@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.i4bchile.appperritos.R;
+import com.i4bchile.appperritos.databinding.FragmentFavoritesBinding;
 import com.i4bchile.appperritos.model.Favorites;
 import com.i4bchile.appperritos.model.Repository;
 import com.i4bchile.appperritos.presenter.FavoritesPresenter;
@@ -40,6 +41,7 @@ public class FavoritesFragment extends Fragment implements IFavoritesPresenterVi
     private FavoritesPresenter presenter;
     private FavoritesAdapter adapter;
     private RecyclerView recyclerview;
+    private FragmentFavoritesBinding binding;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -75,13 +77,14 @@ public class FavoritesFragment extends Fragment implements IFavoritesPresenterVi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding=FragmentFavoritesBinding.inflate(inflater,container,false);
+        View thisView=binding.getRoot();
 
-        View thisView=inflater.inflate(R.layout.fragment_favorites, container, false);
         Log.d(TAG, "onCreateView: Construyendo el adapter de Favorites");
         adapter=new FavoritesAdapter(new ArrayList<>());
         Log.d(TAG, "onCreateView: Construyendo el Presenter de favorites");
         presenter=new FavoritesPresenter(this,new Repository());
-        recyclerview=thisView.findViewById(R.id.rv_Favorites);
+        recyclerview=binding.rvFavorites;
         recyclerview.setLayoutManager(new GridLayoutManager(getContext(),1));
         Log.d(TAG, "onCreateView: Vinculando Favorites Fragment con Adapter");
         recyclerview.setAdapter(adapter);

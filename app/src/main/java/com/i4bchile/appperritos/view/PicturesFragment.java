@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.i4bchile.appperritos.R;
+import com.i4bchile.appperritos.databinding.FragmentPicturesBinding;
 import com.i4bchile.appperritos.model.Repository;
 import com.i4bchile.appperritos.presenter.IBreedPresenterView;
 import com.i4bchile.appperritos.presenter.PicturesPresenter;
@@ -42,6 +43,7 @@ public class PicturesFragment extends Fragment implements IBreedPresenterView, O
     private PicturesPresenter presenter;
     private PicturesAdapter adapter;
     private RecyclerView recyclerview;
+    private FragmentPicturesBinding binding;
 
     public PicturesFragment() {
         // Required empty public constructor
@@ -80,13 +82,15 @@ public class PicturesFragment extends Fragment implements IBreedPresenterView, O
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_pictures, container, false);
-        tvBreedTitle=view.findViewById(R.id.textView);
+        binding=FragmentPicturesBinding.inflate(inflater,container,false);
+        View view=binding.getRoot();
+
+        tvBreedTitle=binding.textView;
         tvBreedTitle.setText("Picture list for breed: " +mParam2.toUpperCase());
         Log.d(TAG, "onCreate View: llamando al presentador de Pictures");
         adapter=new PicturesAdapter(new ArrayList<>(),this);
         presenter=new PicturesPresenter(this,new Repository(),mParam2);
-        recyclerview=view.findViewById(R.id.rv_Pictures);
+        recyclerview=binding.rvPictures;
         recyclerview.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerview.setAdapter(adapter);
 

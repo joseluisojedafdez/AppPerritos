@@ -82,7 +82,7 @@ public class FavoritesFragment extends Fragment implements IFavoritesPresenterVi
         Log.d(TAG, "onCreateView: Construyendo el Presenter de favorites");
         presenter=new FavoritesPresenter(this,new Repository());
         recyclerview=thisView.findViewById(R.id.rv_Favorites);
-        recyclerview.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        recyclerview.setLayoutManager(new GridLayoutManager(getContext(),1));
         Log.d(TAG, "onCreateView: Vinculando Favorites Fragment con Adapter");
         recyclerview.setAdapter(adapter);
 

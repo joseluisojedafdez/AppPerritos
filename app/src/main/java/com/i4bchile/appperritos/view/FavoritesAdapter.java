@@ -72,7 +72,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         public void bind(Favorites favorite) {
             Log.d(TAG, "bind favorito: "+favorite);
-            breedFavorite.setText(favorite.getBreed());
+            breedFavorite.setText(favorite.getBreed().toUpperCase());
             timeStamp.setText(favorite.getTimeStamp());
             Glide.with(context).
                     load(favorite.getUrlImage()).

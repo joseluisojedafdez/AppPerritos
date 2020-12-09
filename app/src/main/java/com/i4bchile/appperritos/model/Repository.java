@@ -103,44 +103,30 @@ public class Repository {
 
         dbFavorites.collection("favorites")
                 .add(favorite)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
     }
 
     public void downloadAllFavorites(){
         List<Favorites> listFavorites=new ArrayList<>();
         dbFavorites.collection("favorites")
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Favorites favorite=setFavorite(document);
-                                listFavorites.add(favorite);
-                                Log.d(TAG, "onComplete: Lista Favoritos:a añadido " + favorite.toString() );
-                                Log.d(TAG, "onComplete: La lista tiene actualmente "+ listFavorites.size()+" elementos");
-                            }
-                            Log.d(TAG, "onComplete: enviando lista favoritos al presenter"+listFavorites.toString());
-                            Log.d(TAG, "onComplete: La lista tiene actualmente "+listFavorites.size()+" elementos");
-                            favoritesPresenter.showFavorites(listFavorites);
-
-
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                            Favorites favorite=setFavorite(document);
+                            listFavorites.add(favorite);
+                            Log.d(TAG, "onComplete: Lista Favoritos:a añadido " + favorite.toString() );
+                            Log.d(TAG, "onComplete: La lista tiene actualmente "+ listFavorites.size()+" elementos");
                         }
+                        Log.d(TAG, "onComplete: enviando lista favoritos al presenter"+listFavorites.toString());
+                        Log.d(TAG, "onComplete: La lista tiene actualmente "+listFavorites.size()+" elementos");
+                        favoritesPresenter.showFavorites(listFavorites);
 
+
+                    } else {
+                        Log.w(TAG, "Error getting documents.", task.getException());
                     }
 
                 });

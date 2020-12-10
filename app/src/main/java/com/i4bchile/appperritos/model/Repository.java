@@ -166,7 +166,7 @@ public class Repository {
 
 
     public boolean isFavorite(String url) {
-        boolean result = false;
+        boolean result = true;
 
         if (getFavorites()) {
             Log.d(TAG, "isFavorite: Favoriteslist" + favoritesListToFilter.toString());
@@ -179,8 +179,8 @@ public class Repository {
             }
             Log.d(TAG, "isFavorite: URL a añadir" + url);
             Log.d(TAG, "isFavorite: Lista URL:" + filter);
-            if (filter.contains(url)) {
-                result = true;
+            if (!filter.contains(url)) {
+                result = false;
             }
 
         }

@@ -34,7 +34,7 @@ public class Repository {
     private FavoritesPresenter favoritesPresenter;
     private List<String> breedsPicture = new ArrayList<>();
     private FirebaseFirestore dbFavorites = FirebaseFirestore.getInstance();
-    private Set<Favorites> favoritesListToFilter=new HashSet<>();
+    private final Set<Favorites> favoritesListToFilter=new HashSet<>();
 
     public void setFavoritesPresenter(FavoritesPresenter favoritesPresenter) {
         this.favoritesPresenter = favoritesPresenter;
@@ -173,7 +173,7 @@ public class Repository {
             List<String> filter = new ArrayList<>();
             for (Favorites favorite : favoritesListToFilter) {
                 String addURL = favorite.getUrlImage();
-                Log.d(TAG, "isFavorite: URL para lista URLs" + addURL);
+                Log.d(TAG, "isFavorite: añadiendo URLs a filter" + addURL);
                 filter.add(addURL);
 
             }

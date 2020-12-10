@@ -28,6 +28,7 @@ public class PicturesPresenter implements IRepositoryPresenter {
             repository.setPicturesPresenter(this);
             Log.d(TAG, "PicturePresenter: llamando al método loadBreedList");
             repository.loadBreedPictures(breed);
+            repository.getFavorites();
         }
 
         @Override

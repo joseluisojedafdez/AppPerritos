@@ -18,6 +18,7 @@ public class FavoritesPresenter  {
         this.repository = repository;
         repository.setFavoritesPresenter(this);
         repository.downloadAllFavorites();
+
     }
 
 

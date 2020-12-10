@@ -20,6 +20,7 @@ public class BreedPresenter implements IRepositoryPresenter {
         repository.setBreedPresenter(this);
         Log.d(TAG, "BreedPresenter: llamando al método loadBreedList");
         repository.lodadBreedList();
+        repository.getFavorites();
     }
 
     @Override

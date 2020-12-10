@@ -2,6 +2,7 @@ package com.i4bchile.appperritos.presenter;
 
 import android.util.Log;
 
+import com.i4bchile.appperritos.model.Favorites;
 import com.i4bchile.appperritos.model.IRepositoryPresenter;
 import com.i4bchile.appperritos.model.Repository;
 
@@ -31,6 +32,7 @@ public class PicturesPresenter implements IRepositoryPresenter {
         }
 
         public void addFavorite(String pPicture, String pBreed){
+                      
             repository.loadNewFavorite(pPicture,pBreed);
         }
     }

@@ -95,19 +95,22 @@ public class Repository {
     }
 
     public void loadNewFavorite(String pPicture, String pBreed){
+            Map<String, Object> favorite = new HashMap<>();
+            favorite.put("breed", pBreed);
+            favorite.put("urlPicture", pPicture);
+            favorite.put("timeStamp", new Date().toString());
 
-        Map<String,Object> favorite=new HashMap<>();
-        favorite.put("breed",pBreed);
-        favorite.put("urlPicture",pPicture);
-        favorite.put("timeStamp",new Date().toString() );
 
-        dbFavorites.collection("favorites")
-                .add(favorite)
-                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
-                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+            dbFavorites.collection("favorites")
+                    .add(favorite)
+                    .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+
     }
 
-    public void downloadAllFavorites(){
+
+
+    public List<Favorites> downloadAllFavorites(){
         List<Favorites> listFavorites=new ArrayList<>();
         dbFavorites.collection("favorites")
                 .get()
@@ -130,7 +133,7 @@ public class Repository {
                     }
 
                 });
-
+        return listFavorites;
     }
 
 

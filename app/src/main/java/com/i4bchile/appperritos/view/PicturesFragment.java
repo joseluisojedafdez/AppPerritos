@@ -96,6 +96,12 @@ public class PicturesFragment extends Fragment implements IBreedPresenterView, O
 
         return view;
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding=null;
+
+    }
 
     @Override
     public void showBreed(List<String> breeds) {

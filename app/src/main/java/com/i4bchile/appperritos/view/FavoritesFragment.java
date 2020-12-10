@@ -92,6 +92,13 @@ public class FavoritesFragment extends Fragment implements IFavoritesPresenterVi
         return thisView;
 
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding=null;
+
+    }
+
 
     @Override
     public void showFavorites(List<Favorites> listFavorites) {

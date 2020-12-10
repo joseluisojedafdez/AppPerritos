@@ -109,6 +109,16 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
         adapter.updateBreeds(breeds);
     }
 
+    @Override
+    public void showToast_Failure() {
+        //nothing here
+    }
+
+    @Override
+    public void showToast_Success() {
+        //nothing here
+    }
+
 
     @Override
     public void onClick(int position) {

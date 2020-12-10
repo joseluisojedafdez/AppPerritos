@@ -9,4 +9,5 @@
     <string name="textview2">TextView</string>
     <string name="textview3">TextView</string>
     <string name="my_favorite_dogs">MY FAVORITE DOGS</string>
+    <string name="picturestitle">\"Picture list for breed: \"</string>
 </resources>

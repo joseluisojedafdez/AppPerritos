@@ -86,7 +86,7 @@ public class PicturesFragment extends Fragment implements IBreedPresenterView, O
         View view=binding.getRoot();
 
         tvBreedTitle=binding.textView;
-        tvBreedTitle.setText("Picture list for breed: " +mParam2.toUpperCase());
+        tvBreedTitle.setText(getString(R.string.picturestitle) +mParam2.toUpperCase());
         Log.d(TAG, "onCreate View: llamando al presentador de Pictures");
         adapter=new PicturesAdapter(new ArrayList<>(),this);
         presenter=new PicturesPresenter(this,new Repository(),mParam2);
@@ -109,9 +109,19 @@ public class PicturesFragment extends Fragment implements IBreedPresenterView, O
     }
 
     @Override
+    public void showToast_Failure() {
+        Toast.makeText(getContext(), "The picture was already in favorites", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showToast_Success() {
+        Toast.makeText(getContext(), "Adding the picture to favorites", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void onLongClick(int position) {
         Log.d(TAG, "onClick: haciendo long click en el elemento de la lista"+adapter.getListOfPictures().get(position));
-        Toast.makeText(getContext(),"Adding the picture "+adapter.getListOfPictures().get(position)+" to favorites", Toast.LENGTH_LONG).show();
+
         presenter.addFavorite(adapter.getListOfPictures().get(position),mParam2);
     }
 }

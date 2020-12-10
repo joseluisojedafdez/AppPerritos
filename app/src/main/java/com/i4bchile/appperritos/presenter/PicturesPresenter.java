@@ -1,8 +1,10 @@
 package com.i4bchile.appperritos.presenter;
 
+import android.os.Build;
 import android.util.Log;
 
-import com.i4bchile.appperritos.model.Favorites;
+import androidx.annotation.RequiresApi;
+
 import com.i4bchile.appperritos.model.IRepositoryPresenter;
 import com.i4bchile.appperritos.model.Repository;
 
@@ -11,7 +13,10 @@ import java.util.List;
 public class PicturesPresenter implements IRepositoryPresenter {
 
         private static final String TAG = "InfoLog";
-        private IBreedPresenterView viewPicture;
+
+
+
+    private IBreedPresenterView viewPicture;
         private Repository repository;
         private String breed;
 
@@ -31,9 +36,18 @@ public class PicturesPresenter implements IRepositoryPresenter {
             viewPicture.showBreed(breeds);
         }
 
+
         public void addFavorite(String pPicture, String pBreed){
-                      
-            repository.loadNewFavorite(pPicture,pBreed);
+
+            if(!repository.isFavorite(pPicture)) {
+                repository.loadNewFavorite(pPicture, pBreed);
+                viewPicture.showToast_Success();
+
+            }
+            else {
+                viewPicture.showToast_Failure();
+
+            }
         }
     }
 

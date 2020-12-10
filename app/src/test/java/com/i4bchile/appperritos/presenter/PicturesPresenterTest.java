@@ -75,7 +75,7 @@ public class PicturesPresenterTest {
 
     }
     @Test
-    public void addFavorite() {
+    public void addFavorite_success() {
         //Given
         breeds=new ArrayList<>();
         //when

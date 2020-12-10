@@ -78,9 +78,28 @@ public class PicturesPresenterTest {
     public void addFavorite_success() {
         //Given
         breeds=new ArrayList<>();
+
         //when
         presenter.addFavorite(picture,breed);
+        Mockito.verify(repository,Mockito.times(1)).isFavorite(picture);
         Mockito.verify(repository,Mockito.times(1)).loadNewFavorite(picture,breed);
+        Mockito.verify(viewPicture,Mockito.times(1)).showToast_Success();
+        Mockito.verify(viewPicture,Mockito.never()).showToast_Failure();
+        Mockito.verify(viewPicture,Mockito.never()).showBreed(breeds);
+
+    }
+    @Test
+    public void addFavorite_failure() {
+        //Given
+        breeds=new ArrayList<>();
+        Mockito.when(repository.isFavorite(picture)).thenReturn(true);
+        //when
+        presenter.addFavorite(picture,breed);
+
+        Mockito.verify(repository,Mockito.times(1)).isFavorite(picture);
+        Mockito.verify(repository,Mockito.never()).loadNewFavorite(picture,breed);
+        Mockito.verify(viewPicture,Mockito.never()).showToast_Success();
+        Mockito.verify(viewPicture,Mockito.times(1)).showToast_Failure();
         Mockito.verify(viewPicture,Mockito.never()).showBreed(breeds);
 
     }

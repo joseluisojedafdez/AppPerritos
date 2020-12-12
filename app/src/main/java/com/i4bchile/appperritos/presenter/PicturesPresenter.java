@@ -1,12 +1,9 @@
 package com.i4bchile.appperritos.presenter;
 
-import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
 import com.i4bchile.appperritos.model.IRepositoryPresenter;
-import com.i4bchile.appperritos.model.Repository;
+import com.i4bchile.appperritos.model.data.Repository;
 
 import java.util.List;
 
@@ -17,12 +14,14 @@ public class PicturesPresenter implements IRepositoryPresenter {
 
 
     private IBreedPresenterView viewPicture;
-        private Repository repository;
-        private String breed;
+    private Repository repository;
+    private String breed;
+    private AddFavorite addFavorite;
 
-        public PicturesPresenter(IBreedPresenterView viewBreed, Repository repository, String pBreed) {
+        public PicturesPresenter(IBreedPresenterView viewBreed, AddFavorite pAddFavorite, Repository repository, String pBreed) {
             this.viewPicture = viewBreed;
             this.repository = repository;
+            this.addFavorite = pAddFavorite;
             this.breed=pBreed;
             Log.d(TAG, "PicturePresenter: seteando el presentador del repositorio");
             repository.setPicturesPresenter(this);
@@ -42,11 +41,11 @@ public class PicturesPresenter implements IRepositoryPresenter {
 
             if(!repository.isFavorite(pPicture)) {
                 repository.loadNewFavorite(pPicture, pBreed);
-                viewPicture.showToast_Success();
+                addFavorite.showToast_Success();
 
             }
             else {
-                viewPicture.showToast_Failure();
+                addFavorite.showToast_Failure();
 
             }
         }

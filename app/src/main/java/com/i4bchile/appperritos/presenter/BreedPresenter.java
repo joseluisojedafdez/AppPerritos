@@ -2,9 +2,8 @@ package com.i4bchile.appperritos.presenter;
 
 import android.util.Log;
 
-import com.i4bchile.appperritos.model.Favorites;
 import com.i4bchile.appperritos.model.IRepositoryPresenter;
-import com.i4bchile.appperritos.model.Repository;
+import com.i4bchile.appperritos.model.data.Repository;
 
 import java.util.List;
 

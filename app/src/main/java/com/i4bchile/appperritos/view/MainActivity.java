@@ -1,9 +1,7 @@
 package com.i4bchile.appperritos.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -13,9 +11,8 @@ import android.widget.Button;
 
 import com.i4bchile.appperritos.R;
 import com.i4bchile.appperritos.databinding.ActivityMainBinding;
-import com.i4bchile.appperritos.model.Repository;
+import com.i4bchile.appperritos.model.data.Repository;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
-import com.i4bchile.appperritos.presenter.FavoritesPresenter;
 import com.i4bchile.appperritos.presenter.IBreedPresenterView;
 
 import java.util.ArrayList;
@@ -43,12 +40,12 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
        [x] Mostrar en cada fragmento el Recyclerview correspondiente
                 [x] RecyclerView Breed en Main Activity
                 [x] RecyclerView Detalles en BreedFragmentView
-                [x] Recyclerview Favorites en FavoritesFragmentView
+                [x] Recyclerview Favorite en FavoritesFragmentView
 
        [x] Crear los adapters que sean necesarios
             [x] Adapter para Breed
             [x] Adapter para BreedImage
-            [x] Adapter para Favorites
+            [x] Adapter para Favorite
 
     [x] PARTE 2 CONSUMO Y MUESTRA INFORMACIÓN
         [x] Añadir dependencias de Retrofit
@@ -59,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
         [x] Crear el presentador para cada vista. Crear las interfaces correspondientes
             [x] Crear el presentador para Breed
             [x] Crear el presentador para BreedImage
-            [x] Crear el presentador para Favorites
+            [x] Crear el presentador para Favorite
         [x] IMplementar los métodos de las interfaces en las vistas
             [x] implementar metodos Breed
             [x] implementar metodos BreedImage
-            [x] implementar metodos Favorites
+            [x] implementar metodos Favorite
 
         [x] Instanciar los adaptadores donde sean necesario y pasar los datasets que necesite cada uno de ellos
             [x] instanciar y actualizar BreedAdapter
@@ -109,15 +106,7 @@ public class MainActivity extends AppCompatActivity implements IBreedPresenterVi
         adapter.updateBreeds(breeds);
     }
 
-    @Override
-    public void showToast_Failure() {
-        //nothing here
-    }
 
-    @Override
-    public void showToast_Success() {
-        //nothing here
-    }
 
 
     @Override

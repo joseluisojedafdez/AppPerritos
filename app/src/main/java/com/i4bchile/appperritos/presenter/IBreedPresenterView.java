@@ -6,7 +6,5 @@ public interface IBreedPresenterView {
 
     void showBreed(List<String> breeds);
 
-    void showToast_Failure();
 
-    void showToast_Success();
 }

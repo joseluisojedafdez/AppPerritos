@@ -2,7 +2,7 @@ package com.i4bchile.appperritos.model;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Favorites {
+public class Favorite {
 
     private String breed;
     private String urlImage;
@@ -35,7 +35,7 @@ public class Favorites {
     @NotNull
     @Override
     public String toString() {
-        return "Favorites{" +
+        return "Favorite{" +
                 "breed='" + breed + '\'' +
                 ", urlImage='" + urlImage + '\'' +
                 ", timeStamp='" + timeStamp + '\'' +

@@ -1,4 +1,4 @@
-package com.i4bchile.appperritos.data;
+package com.i4bchile.appperritos.model.data;
 
 import com.i4bchile.appperritos.model.Breed;
 import com.i4bchile.appperritos.model.BreedImage;

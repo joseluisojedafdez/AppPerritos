@@ -1,6 +1,6 @@
 package com.i4bchile.appperritos.presenter;
 
-import com.i4bchile.appperritos.model.Repository;
+import com.i4bchile.appperritos.model.data.Repository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +12,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BreedPresenterTest {

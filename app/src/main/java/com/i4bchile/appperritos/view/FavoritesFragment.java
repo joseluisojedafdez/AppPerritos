@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -12,13 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.i4bchile.appperritos.R;
 import com.i4bchile.appperritos.databinding.FragmentFavoritesBinding;
-import com.i4bchile.appperritos.model.Favorites;
-import com.i4bchile.appperritos.model.Repository;
+import com.i4bchile.appperritos.model.Favorite;
+import com.i4bchile.appperritos.model.data.Repository;
 import com.i4bchile.appperritos.presenter.FavoritesPresenter;
 import com.i4bchile.appperritos.presenter.IFavoritesPresenterView;
-import com.i4bchile.appperritos.presenter.PicturesPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,14 +77,16 @@ public class FavoritesFragment extends Fragment implements IFavoritesPresenterVi
         binding=FragmentFavoritesBinding.inflate(inflater,container,false);
         View thisView=binding.getRoot();
 
-        Log.d(TAG, "onCreateView: Construyendo el adapter de Favorites");
+        Log.d(TAG, "onCreateView: Construyendo el adapter de Favorite");
         adapter=new FavoritesAdapter(new ArrayList<>());
         Log.d(TAG, "onCreateView: Construyendo el Presenter de favorites");
         presenter=new FavoritesPresenter(this,new Repository());
         recyclerview=binding.rvFavorites;
         recyclerview.setLayoutManager(new GridLayoutManager(getContext(),1));
-        Log.d(TAG, "onCreateView: Vinculando Favorites Fragment con Adapter");
+        Log.d(TAG, "onCreateView: Vinculando Favorite Fragment con Adapter");
         recyclerview.setAdapter(adapter);
+
+
 
         return thisView;
 
@@ -101,8 +100,9 @@ public class FavoritesFragment extends Fragment implements IFavoritesPresenterVi
 
 
     @Override
-    public void showFavorites(List<Favorites> listFavorites) {
+    public void showFavorites(List<Favorite> listFavorites) {
         Log.d(TAG, "showFavorites: en Fragmento: la lista tiene "+listFavorites.size()+" elementos");
         adapter.updateFavorites(listFavorites);
+
     }
 }

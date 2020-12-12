@@ -1,4 +1,4 @@
-package com.i4bchile.appperritos.data;
+package com.i4bchile.appperritos.model.data;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,13 +1,13 @@
-package com.i4bchile.appperritos.model;
+package com.i4bchile.appperritos.model.data;
 
-import android.os.Build;
 import android.util.Log;
-
-import androidx.annotation.RequiresApi;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.i4bchile.appperritos.data.RetrofitClient;
+import com.i4bchile.appperritos.model.Breed;
+import com.i4bchile.appperritos.model.BreedImage;
+import com.i4bchile.appperritos.model.Favorite;
+import com.i4bchile.appperritos.model.data.RetrofitClient;
 import com.i4bchile.appperritos.presenter.BreedPresenter;
 import com.i4bchile.appperritos.presenter.FavoritesPresenter;
 import com.i4bchile.appperritos.presenter.PicturesPresenter;
@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +33,7 @@ public class Repository {
     private FavoritesPresenter favoritesPresenter;
     private List<String> breedsPicture = new ArrayList<>();
     private FirebaseFirestore dbFavorites = FirebaseFirestore.getInstance();
-    private final Set<Favorites> favoritesListToFilter=new HashSet<>();
+    private final Set<Favorite> favoriteListToFilter =new HashSet<>();
 
     public void setFavoritesPresenter(FavoritesPresenter favoritesPresenter) {
         this.favoritesPresenter = favoritesPresenter;
@@ -106,14 +105,14 @@ public class Repository {
     }
 
     public void downloadAllFavorites() {
-        List<Favorites> listFavorites = new ArrayList<>();
+        List<Favorite> listFavorites = new ArrayList<>();
         dbFavorites.collection("favorites")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d(TAG, document.getId() + " => " + document.getData());
-                            Favorites favorite = setFavorite(document);
+                            Favorite favorite = setFavorite(document);
                             listFavorites.add(favorite);
                             Log.d(TAG, "onComplete: Lista Favoritos:a añadido " + favorite.toString());
                             Log.d(TAG, "onComplete: La lista tiene actualmente " + listFavorites.size() + " elementos");
@@ -139,10 +138,10 @@ public class Repository {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d(TAG, document.getId() + " => " + document.getData());
-                            Favorites favorite = setFavorite(document);
-                            favoritesListToFilter.add(favorite);
+                            Favorite favorite = setFavorite(document);
+                            favoriteListToFilter.add(favorite);
                             Log.d(TAG, "onComplete IsFavorites: Lista Favoritos:a añadido " + favorite.toString());
-                            Log.d(TAG, "onComplete isFavorites: La lista tiene actualmente " + favoritesListToFilter.size() + " elementos");
+                            Log.d(TAG, "onComplete isFavorites: La lista tiene actualmente " + favoriteListToFilter.size() + " elementos");
                         }
 
 
@@ -156,8 +155,8 @@ public class Repository {
     }
 
 
-    private Favorites setFavorite(QueryDocumentSnapshot document) {
-        Favorites favorite = new Favorites();
+    private Favorite setFavorite(QueryDocumentSnapshot document) {
+        Favorite favorite = new Favorite();
         favorite.setBreed(document.getString("breed"));
         favorite.setTimeStamp(document.getString("timeStamp"));
         favorite.setUrlImage(document.getString("urlPicture"));
@@ -169,9 +168,9 @@ public class Repository {
         boolean result = true;
 
         if (getFavorites()) {
-            Log.d(TAG, "isFavorite: Favoriteslist" + favoritesListToFilter.toString());
+            Log.d(TAG, "isFavorite: Favoriteslist" + favoriteListToFilter.toString());
             List<String> filter = new ArrayList<>();
-            for (Favorites favorite : favoritesListToFilter) {
+            for (Favorite favorite : favoriteListToFilter) {
                 String addURL = favorite.getUrlImage();
                 Log.d(TAG, "isFavorite: añadiendo URLs a filter" + addURL);
                 filter.add(addURL);

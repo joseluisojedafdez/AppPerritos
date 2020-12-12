@@ -1,7 +1,7 @@
 package com.i4bchile.appperritos.presenter;
 
-import com.i4bchile.appperritos.model.Favorites;
-import com.i4bchile.appperritos.model.Repository;
+import com.i4bchile.appperritos.model.Favorite;
+import com.i4bchile.appperritos.model.data.Repository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,16 +14,15 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
-public class FavoritesPresenterTest {
+public class FavoritePresenterTest {
 
     @Mock
     private IFavoritesPresenterView favoriteView;
     @Mock
     private Repository repository;
 
-    private List<Favorites> favoritesList;
+    private List<Favorite> favoriteList;
     private FavoritesPresenter presenter;
 
     @Before
@@ -35,33 +34,33 @@ public class FavoritesPresenterTest {
     @Test
     public void showFavorites_emptyList() {
         //Given
-        favoritesList=new ArrayList<>();
+        favoriteList =new ArrayList<>();
         //When
-        favoriteView.showFavorites(favoritesList);
+        favoriteView.showFavorites(favoriteList);
         //Then
-        Mockito.verify(favoriteView,Mockito.times(1)).showFavorites(favoritesList);
+        Mockito.verify(favoriteView,Mockito.times(1)).showFavorites(favoriteList);
     }
     @Test
     public void showFavorites_null() {
         //Given
-        favoritesList=null;
+        favoriteList =null;
         //When
-        favoriteView.showFavorites(favoritesList);
+        favoriteView.showFavorites(favoriteList);
         //Then
-        Mockito.verify(favoriteView,Mockito.times(1)).showFavorites(favoritesList);
+        Mockito.verify(favoriteView,Mockito.times(1)).showFavorites(favoriteList);
     }
     @Test
     public void showFavorites_listWithData() {
         //Given
-        favoritesList=new ArrayList<>();
-        Favorites favorite=new Favorites();
+        favoriteList =new ArrayList<>();
+        Favorite favorite=new Favorite();
         favorite.setBreed("Akita");
         favorite.setUrlImage("imagen");
         favorite.setTimeStamp("timestamp");
-        favoritesList.add(favorite);
+        favoriteList.add(favorite);
         //When
-        favoriteView.showFavorites(favoritesList);
+        favoriteView.showFavorites(favoriteList);
         //Then
-        Mockito.verify(favoriteView,Mockito.times(1)).showFavorites(favoritesList);
+        Mockito.verify(favoriteView,Mockito.times(1)).showFavorites(favoriteList);
     }
 }

@@ -66,7 +66,7 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.BreedAdapter
 
         public BreedAdapterVH(@NonNull View itemView) {
             super(itemView);
-            tvBreed=binding.imgBreed;;
+            tvBreed=binding.imgBreed;
             itemView.setOnClickListener(this);
 
         }

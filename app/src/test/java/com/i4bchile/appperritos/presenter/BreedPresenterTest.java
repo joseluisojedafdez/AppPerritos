@@ -27,7 +27,7 @@ public class BreedPresenterTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         presenter = new BreedPresenter(viewBreed, repository);
     }

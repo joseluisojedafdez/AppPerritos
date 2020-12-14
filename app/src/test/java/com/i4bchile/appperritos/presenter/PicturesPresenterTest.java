@@ -30,7 +30,7 @@ public class PicturesPresenterTest {
     private PicturesPresenter presenter;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp()  {
         MockitoAnnotations.openMocks(this);
         presenter=new PicturesPresenter(viewPicture, addFavorite,repository,breed);
         picture="picture";

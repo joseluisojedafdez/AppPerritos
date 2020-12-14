@@ -26,7 +26,7 @@ public class FavoritePresenterTest {
     private FavoritesPresenter presenter;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp()  {
         MockitoAnnotations.openMocks(this);
         presenter=new FavoritesPresenter(favoriteView,repository);
     }
